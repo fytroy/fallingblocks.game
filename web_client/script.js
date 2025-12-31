@@ -5,7 +5,7 @@
 // If deployed to a cloud server with a domain:
 // const WS_SERVER_URL = 'wss://your-cloud-server.com:5000'; // Use wss for HTTPS if server supports it
 // For local testing (if client and server are on the same machine):
-const WS_SERVER_URL = 'ws://localhost:5000'; // Default for local testing
+const WS_SERVER_URL = 'ws://localhost:5001'; // Default for local testing
 
 // These must match the dimensions used in style.css for the game-display element
 const CLIENT_DISPLAY_WIDTH = 320;

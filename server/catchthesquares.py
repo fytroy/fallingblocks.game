@@ -165,7 +165,8 @@ async def send_game_state_to_clients():
             message = json.dumps(current_state_for_client)
 
             # Send the message to all currently connected clients concurrently
-            await asyncio.wait([client.send(message) for client in connected_clients], return_when=asyncio.ALL_COMPLETED)
+            if connected_clients:
+                await asyncio.gather(*[client.send(message) for client in connected_clients], return_exceptions=True)
 
 # THIS IS THE CORRECTED FUNCTION
 def run_websocket_server(loop):
@@ -180,7 +181,7 @@ def run_websocket_server(loop):
         try:
             # Start the WebSocket server. 'await' here ensures that the server
             # is fully initialized within the context of a running loop.
-            server = await websockets.serve(websocket_handler, "0.0.0.0", 5000)
+            server = await websockets.serve(websocket_handler, "0.0.0.0", 5001)
             print(f"WebSocket server successfully started on {server.sockets[0].getsockname()}")
 
             # Create and schedule the game state sender task.
